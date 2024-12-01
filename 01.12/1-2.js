@@ -2,25 +2,29 @@
 
 import createReadlineInterface from "../utils/create-readline-interface.js";
 
-async function calculateListDistance() {
-    const rl = createReadlineInterface("input.txt");
+async function calculateSimilarityScore() {
+    const readlineInterface = createReadlineInterface("input.txt");
 
     let leftList = [];
     let rightList = [];
 
-    for await (const line of rl) {
+    for await (const line of readlineInterface) {
         const numbersInRow = line.split("   ");
         leftList.push(Number(numbersInRow[0]));
         rightList.push(Number(numbersInRow[1]));
     }
 
-    leftList.sort();
-    rightList.sort();
+    const numberOccurrences = [];
+    leftList.forEach(leftListEntry => {
+        numberOccurrences.push(rightList.filter((rightListEntry) => {
+            return rightListEntry === leftListEntry;
+        }).length);
+    });
 
     console.log(leftList.reduce((acc, curr, index) => {
-        return Math.abs(leftList[index] - rightList[index]) + acc;
+        return (leftList[index] * numberOccurrences[index]) + acc;
     }, 0));
 
 }
 
-await calculateListDistance();
+await calculateSimilarityScore();
