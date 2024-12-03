@@ -1,6 +1,6 @@
 "use strict";
 
-import createReadlineInterface from "../utils/create-readline-interface.js";
+import { createReadlineInterface } from "../utils/read-file.js";
 
 // checks if array is ascending and difference between neighbors is not bigger than 3
 const isAscending = (array) => {

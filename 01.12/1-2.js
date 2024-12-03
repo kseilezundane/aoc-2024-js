@@ -1,6 +1,6 @@
 "use strict";
 
-import createReadlineInterface from "../utils/create-readline-interface.js";
+import { createReadlineInterface } from "../utils/read-file.js";
 
 async function calculateSimilarityScore() {
     const readlineInterface = createReadlineInterface("input.txt");
